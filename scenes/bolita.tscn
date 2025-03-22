@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://7l24w1kqad1h"]
+[gd_scene load_steps=8 format=3 uid="uid://7l24w1kqad1h"]
 
 [ext_resource type="PackedScene" uid="uid://bcvcxmcji0ple" path="res://blender mesh/bolita.blend" id="1_h8dil"]
+[ext_resource type="Script" uid="uid://c73civbbiq0x6" path="res://scripts/bolita_fisicas.cs" id="1_pk5b6"]
 [ext_resource type="Texture2D" uid="uid://pbuaynma6kbq" path="res://textures/texturepiso.jpg" id="2_7b46l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7b46l"]
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pk5b6"]
 albedo_texture = ExtResource("2_7b46l")
@@ -14,16 +18,17 @@ size = Vector3(100, 1, 100)
 
 [node name="bolita" type="Node3D"]
 
-[node name="bolita_object" parent="." instance=ExtResource("1_h8dil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.008)
+[node name="bolita" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="bolita_object"]
-transform = Transform3D(-4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 4.19986, 1.99754, 1.01423)
-h_offset = 1.0
-v_offset = 1.0
-current = true
-fov = 61.875
-size = 4.93536
+[node name="CharacterBody3D" type="CharacterBody3D" parent="bolita"]
+script = ExtResource("1_pk5b6")
+
+[node name="bolita_object" parent="bolita/CharacterBody3D" instance=ExtResource("1_h8dil")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142015, 1.21027, 0.210635)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bolita/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142015, 1.21027, 0.210635)
+shape = SubResource("SphereShape3D_7b46l")
 
 [node name="escenario" type="Node3D" parent="."]
 
@@ -35,5 +40,3 @@ mesh = SubResource("PlaneMesh_h8dil")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="escenario/StaticBody3D"]
 shape = SubResource("BoxShape3D_7b46l")
-
-[editable path="bolita_object"]
