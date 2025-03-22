@@ -18,4 +18,7 @@ script = SubResource("CSharpScript_4xowi")
 [node name="bolita" parent="." instance=ExtResource("1_a202f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196793, 2.38419e-07, -0.378708)
 
+[node name="CollisionShape3D" parent="bolita/Sphere/StaticBody3D" index="0"]
+visible = false
+
 [editable path="bolita"]
