@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://tnq087hu6xnw"]
+
+[ext_resource type="PackedScene" uid="uid://bcvcxmcji0ple" path="res://blender mesh/bolita.blend" id="1_a202f"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_4xowi"]
+script/source = "using Godot;
+using System;
+
+public partial class Node3d : Node3D
+{
+    
+}
+"
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("CSharpScript_4xowi")
+
+[node name="bolita" parent="." instance=ExtResource("1_a202f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.196793, 2.38419e-07, -0.378708)
+
+[editable path="bolita"]
