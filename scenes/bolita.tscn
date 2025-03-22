@@ -20,6 +20,11 @@ size = Vector3(100, 1, 100)
 
 [node name="bolita" type="Node3D" parent="."]
 
+[node name="Camera3D" type="Camera3D" parent="bolita"]
+transform = Transform3D(0.026177, -0.604392, 0.796257, 0, 0.79653, 0.604599, -0.999657, -0.0158266, 0.0208508, 3, 3, 0)
+doppler_tracking = 2
+current = true
+
 [node name="CharacterBody3D" type="CharacterBody3D" parent="bolita"]
 script = ExtResource("1_pk5b6")
 
