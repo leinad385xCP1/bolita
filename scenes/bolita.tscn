@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://7l24w1kqad1h"]
+[gd_scene load_steps=9 format=3 uid="uid://7l24w1kqad1h"]
 
 [ext_resource type="PackedScene" uid="uid://bcvcxmcji0ple" path="res://blender mesh/bolita.blend" id="1_h8dil"]
 [ext_resource type="Script" uid="uid://c73civbbiq0x6" path="res://scripts/bolita_fisicas.cs" id="1_pk5b6"]
 [ext_resource type="Texture2D" uid="uid://pbuaynma6kbq" path="res://textures/texturepiso.jpg" id="2_7b46l"]
+[ext_resource type="Script" uid="uid://c1qgnm7jtyoux" path="res://scripts/camaraBolita.cs" id="3_4nlu8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7b46l"]
 radius = 1.0
@@ -19,14 +20,11 @@ size = Vector3(100, 1, 100)
 [node name="bolita" type="Node3D"]
 
 [node name="bolita" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06954, 0)
 
-[node name="Camera3D" type="Camera3D" parent="bolita"]
-transform = Transform3D(0.026177, -0.604392, 0.796257, 0, 0.79653, 0.604599, -0.999657, -0.0158266, 0.0208508, 3, 3, 0)
-doppler_tracking = 2
-current = true
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="bolita"]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="bolita" node_paths=PackedStringArray("Camera")]
 script = ExtResource("1_pk5b6")
+Camera = NodePath("../Camera3D")
 
 [node name="bolita_object" parent="bolita/CharacterBody3D" instance=ExtResource("1_h8dil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142015, 1.21027, 0.210635)
@@ -35,12 +33,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142015, 1.21027, 0.210635)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142015, 1.21027, 0.210635)
 shape = SubResource("SphereShape3D_7b46l")
 
+[node name="Camera3D" type="Camera3D" parent="bolita" node_paths=PackedStringArray("Target")]
+transform = Transform3D(0.999877, -0.0157073, 5.51545e-10, 0.0143108, 0.910982, 0.412198, -0.00647453, -0.412147, 0.911094, -0.512664, 4.1787, 3.58676)
+doppler_tracking = 2
+current = true
+script = ExtResource("3_4nlu8")
+Target = NodePath("../CharacterBody3D")
+
 [node name="escenario" type="Node3D" parent="."]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="escenario"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="escenario/StaticBody3D"]
-transform = Transform3D(-2.18557e-06, 0, 50, 0, 50, 0, -50, 0, -2.18557e-06, 0, 0, 0)
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 mesh = SubResource("PlaneMesh_h8dil")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="escenario/StaticBody3D"]
