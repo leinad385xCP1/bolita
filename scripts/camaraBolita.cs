@@ -5,7 +5,7 @@ public partial class camaraBolita : Camera3D
 {
     [Export] public Node3D Target; // Asigna la bolita aquí en el editor
     [Export] public float SmoothSpeed = 5.0f;
-    [Export] public Vector3 Offset = new Vector3(3, 5, -4);
+    [Export] public Vector3 Offset = new Vector3(0, 6, 5);
 
     public override void _Process(double delta)
     {
